@@ -1,0 +1,11 @@
+{
+    "name": "webtown-php/banner-bundle",
+    "description": "Banner bundle",
+    "authors": [
+        {
+            "name": "Zoltan Feher",
+            "email": "whitezo@webtown.hu"
+        }
+    ],
+    "require": {}
+}

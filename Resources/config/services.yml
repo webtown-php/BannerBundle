@@ -1,0 +1,4 @@
+services:
+#    webtown_php_banner.example:
+#        class: WebtownPhp\BannerBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,3 @@
+webtown_php_banner_homepage:
+    path:     /
+    defaults: { _controller: WebtownPhpBannerBundle:Default:index }
