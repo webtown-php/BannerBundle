@@ -7,5 +7,9 @@
             "email": "whitezo@webtown.hu"
         }
     ],
-    "require": {}
+    "require": {},
+    "license": "MIT",
+    "autoload": {
+        "psr-4": { "WebtownPhp\\BannerBundle\\": "" }
+    }
 }
