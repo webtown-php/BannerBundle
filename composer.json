@@ -7,7 +7,12 @@
             "email": "whitezo@webtown.hu"
         }
     ],
-    "require": {},
+    "require": {
+        "mockery/mockery": "0.9.*",
+        "symfony/config": "~3.0",
+        "phpunit/phpunit": "~5.1",
+        "symfony/symfony": "~3.0"
+    },
     "license": "MIT",
     "autoload": {
         "psr-4": { "WebtownPhp\\BannerBundle\\": "" }

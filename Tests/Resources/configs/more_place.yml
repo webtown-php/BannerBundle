@@ -1,0 +1,9 @@
+parameters:
+    webtown_php_banner:
+        place:
+            top:
+                size: custom
+                flash: false
+            left:
+                size: 10x400
+                html: false

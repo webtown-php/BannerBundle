@@ -1,0 +1,6 @@
+parameters:
+    webtown_php_banner:
+        custom_size:
+            wide:
+                width: 100
+                height: 10
