@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                 ->enumNode('db_driver')
                     ->values(array('orm', 'odm'))
                     ->isRequired()
+                    ->cannotBeEmpty()
                 ->end()
 
                 // custom size
@@ -77,10 +78,12 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             // label
                             ->scalarNode('label')
+                                ->isRequired()
                                 ->cannotBeEmpty()
                             ->end()
                             // size
                             ->scalarNode('size')
+                                ->isRequired()
                                 ->cannotBeEmpty()
                             ->end()
                             // flash

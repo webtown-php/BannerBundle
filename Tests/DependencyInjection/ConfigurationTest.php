@@ -1,16 +1,17 @@
 <?php
 namespace WebtownPhp\BannerBundle\Tests\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use WebtownPhp\BannerBundle\DependencyInjection\Configuration;
 use WebtownPhp\BannerBundle\DependencyInjection\WebtownPhpBannerExtension;
 
 /**
- * Created by PhpStorm.
- * User: whitezo
- * Date: 15. 12. 17.
- * Time: 15:09
+ * Class ConfigurationTest
+ *
+ * @author Zoltan Feher <whitezo@webtown.hu>
  */
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,23 +38,61 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testEmpty()
     {
-        $this->loadConfiguration($this->container, 'empty.yml');
-        $this->container->compile();
+        $this->setExpectedException(
+            'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException',
+            'The child node "db_driver" at path "webtown_php_banner" must be configured.'
+        );
+        $this->loadConfiguration('empty.yml');
+    }
+
+    public function testWrongDbDriver()
+    {
+        $this->setExpectedExceptionRegExp(
+            'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException',
+            '/The value "\w+" is not allowed.*/'
+        );
+        $this->loadConfiguration('wrong_db_driver.yml');
+    }
+
+    public function testWrongCustomSize()
+    {
+        $this->setExpectedExceptionRegExp(
+            'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException',
+            '/The child node "height".*must be configured./'
+        );
+        $this->loadConfiguration('wrong_custom_size.yml');
+    }
+
+    public function testWrongPlaceLabel()
+    {
+        $this->setExpectedExceptionRegExp(
+            'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException',
+            '/The child node "label".*must be configured./'
+        );
+        $this->loadConfiguration('wrong_place_label.yml');
+    }
+
+    public function testWrongPlaceSize()
+    {
+        $this->setExpectedExceptionRegExp(
+            'Symfony\Component\Config\Definition\Exception\InvalidConfigurationException',
+            '/The child node "size".*must be configured./'
+        );
+        $this->loadConfiguration('wrong_place_size.yml');
     }
 
     public function testOneCustomSize()
     {
-        $this->loadConfiguration($this->container, 'one_custom_size.yml');
-        $this->container->compile();
+        $this->loadConfiguration('one_custom_size.yml');
 
+        $this->assertEquals('orm', $this->container->getParameter('webtown_php_banner')['db_driver']);
         $this->assertEquals(100, $this->container->getParameter('webtown_php_banner')['custom_size']['wide']['width']);
         $this->assertEquals(10, $this->container->getParameter('webtown_php_banner')['custom_size']['wide']['height']);
     }
 
     public function testMoreCustomSize()
     {
-        $this->loadConfiguration($this->container, 'more_custom_size.yml');
-        $this->container->compile();
+        $this->loadConfiguration('more_custom_size.yml');
 
         $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['custom_size']['wide']));
         $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['custom_size']['tall']));
@@ -61,8 +100,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testOnePlace()
     {
-        $this->loadConfiguration($this->container, 'one_place.yml');
-        $this->container->compile();
+        $this->loadConfiguration('one_place.yml');
 
         $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['place']['top']));
         $this->assertEquals(false, $this->container->getParameter('webtown_php_banner')['place']['top']['flash']);
@@ -70,20 +108,33 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testMorePlace()
     {
-        $this->loadConfiguration($this->container, 'more_place.yml');
-        $this->container->compile();
+        $this->loadConfiguration('more_place.yml');
 
         $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['place']['top']));
         $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['place']['left']));
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param string           $resource
+     * Load yaml config
+     *
+     * @param string $resource
      */
-    protected function loadConfiguration(ContainerBuilder $container, $resource)
+    protected function loadConfiguration($resource)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/configs'));
+        $this->container->reset();
+        $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__.'/../Resources/configs'));
         $loader->load($resource);
+        $this->container->compile();
+
+        // load current config
+        $p = $this->container->getParameterBag()->all();
+        $params = array();
+        if (is_array($p))
+        {
+            $params = $p;
+        }
+        $configuration = new Configuration();
+        $proc = new Processor();
+        $proc->processConfiguration($configuration, $params);
     }
 }

@@ -1,8 +1,6 @@
 parameters:
     webtown_php_banner:
         db_driver: orm
-        table_prefix: asdf
         custom_size:
             wide:
                 width: 100
-                height: 10
