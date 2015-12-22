@@ -1,0 +1,63 @@
+parameters:
+    webtown_php_banner_defaults:
+        sizes:
+            full_banner:
+              label: Full Banner
+              width: 468
+              height: 60
+            leaderboard:
+              label: Leaderboard
+              width: 728
+              height: 90
+            square_336:
+              label: Square
+              width: 336
+              height: 280
+            square_300:
+              label: Square
+              width: 300
+              height: 250
+            square_250:
+              label: Square
+              width: 250
+              height: 250
+            skyscraper_160:
+              label: Skyscraper
+              width: 160
+              height: 600
+            skyscraper_120:
+              label: Skyscraper
+              width: 120
+              height: 600
+            small_skyscraper:
+              label: Small Skyscraper
+              width: 120
+              height: 240
+            fat_skyscraper:
+              label: Fat Skyscraper
+              width: 240
+              height: 400
+            half_banner:
+              label: Half Banner
+              width: 234
+              height: 60
+            rectangle:
+              label: Rectangle
+              width: 180
+              height: 150
+            square_button:
+              label: Square Button
+              width: 125
+              height: 125
+            button_90:
+              label: Button
+              width: 120
+              height: 90
+            button_60:
+              label: Button
+              width: 120
+              height: 60
+            button_31:
+              label: Button
+              width: 88
+              height: 31
