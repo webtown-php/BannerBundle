@@ -8,10 +8,13 @@
         }
     ],
     "require": {
+        "symfony/config": "~2.3|~3.0",
+        "symfony/symfony": "~3.0",
+        "php": "~5.4"
+    },
+    "require-dev": {
         "mockery/mockery": "0.9.*",
-        "symfony/config": "~3.0",
-        "phpunit/phpunit": "~5.1",
-        "symfony/symfony": "~3.0"
+        "phpunit/phpunit": "~5.1"
     },
     "license": "MIT",
     "autoload": {
