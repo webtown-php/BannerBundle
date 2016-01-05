@@ -12,4 +12,75 @@ use Doctrine\ORM\EntityRepository;
  */
 class BannerRepository extends EntityRepository
 {
+    /**
+     * @param string $placeName
+     *
+     * @return array
+     */
+    public function getBannersForPlace($placeName)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT b
+            FROM BannerBundle:Banner b
+            WHERE b.isActive
+            AND b.place = :place
+            AND b.maxDisplayCount > b.displayCount
+            AND (b.startAt IS NULL OR b.startAt <= :ts)
+            AND (b.endAt IS NULL OR b.endAt < :ts)'
+        )
+            ->setParameter('place', $placeName)
+            ->setParameter('ts', new \DateTime());
+        return $query->getResult();
+    }
+
+    /**
+     * @param string $placeName
+     *
+     * @return int
+     */
+    public function getPrioritySumForPlace($placeName)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT SUM(b.priority) as s
+            FROM BannerBundle:Banner b
+            WHERE b.isActive
+            AND b.maxDisplayCount > b.displayCount
+            AND (b.startAt IS NULL OR b.startAt <= :ts)
+            AND (b.endAt IS NULL OR b.endAt < :ts)'
+        )
+            ->setParameter('place', $placeName)
+            ->setParameter('ts', new \DateTime());
+
+        return $query->getSingleScalarResult();
+    }
+
+    /**
+     * Increase display counter for banner
+     *
+     * @param Banner $banner
+     */
+    public function incDisplayCountForBanner(Banner $banner)
+    {
+        $this->_em->createQuery(
+            'UPDATE BannerBundle:Banner b
+            WHERE b.id = :id
+            SET b.displayCount = b.displayCount+1')
+            ->setParameter('id', $banner->getId())
+            ->execute();
+    }
+
+    /**
+     * Increase click counter for banner
+     *
+     * @param Banner $banner
+     */
+    public function incClickCountForBanner(Banner $banner)
+    {
+        $this->_em->createQuery(
+            'UPDATE BannerBundle:Banner b
+            WHERE b.id = :id
+            SET b.clickCount = b.clickCount+1')
+            ->setParameter('id', $banner->getId())
+            ->execute();
+    }
 }

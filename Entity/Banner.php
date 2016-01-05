@@ -30,6 +30,8 @@ class Banner
     private $name;
 
     /**
+     * Clicked banner target URL
+     *
      * @var string
      *
      * @ORM\Column(name="target", type="string", length=255)
@@ -37,6 +39,8 @@ class Banner
     private $target;
 
     /**
+     * Place name for banner
+     *
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=255, nullable=false)
@@ -65,6 +69,8 @@ class Banner
     private $isHtmlEnabled;
 
     /**
+     * Show priority
+     *
      * @var integer
      *
      * @ORM\Column(name="priority", type="integer", nullable=false)
