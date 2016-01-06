@@ -4,6 +4,7 @@ namespace WebtownPhp\BannerBundle\Manager;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Form\Exception\LogicException;
 use WebtownPhp\BannerBundle\Entity\Banner;
 use WebtownPhp\BannerBundle\Entity\BannerRepository;
 use WebtownPhp\BannerBundle\Event\BannerEmptyEvent;
@@ -67,30 +68,22 @@ class ORMManager implements ManagerInterface
     protected function doGetBanner($placeName)
     {
         $banners = $this->getRepository()->getBannersForPlace($placeName);
-        $sum = $this->getRepository()->getPrioritySumForPlace($placeName);
-
-        return $this->doGetByPriority($banners, $sum);
-    }
-
-    /**
-     * Get a random banner by priority
-     *
-     * @param array $banners
-     * @param int   $max
-     *
-     * @return Banner
-     */
-    protected function doGetByPriority(array $banners, $max)
-    {
+        if (! $banners) {
+            return null;
+        }
+        $max = 0;
+        foreach ($banners as $banner) {
+            $max += $banner->getPriority();
+        }
         $rand = rand(0, $max);
         foreach ($banners as $banner) {
             if ($rand <= 0) {
-              return $banner;
+                return $banner;
             }
             $rand -= $banner->getPriority();
         }
 
-        return null;
+        throw new LogicException('Banner select by priority failed.');
     }
 
     /**
