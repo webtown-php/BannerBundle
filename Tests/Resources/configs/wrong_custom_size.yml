@@ -1,0 +1,6 @@
+parameters:
+    webtown_php_banner:
+        db_driver: orm
+        custom_size:
+            wide:
+                width: 100

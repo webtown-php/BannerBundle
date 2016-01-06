@@ -1,0 +1,9 @@
+parameters:
+    webtown_php_banner:
+        db_driver: orm
+        table_prefix: aaa
+        place:
+            top:
+                label: topfoo
+                size: custom
+                flash: false

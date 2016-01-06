@@ -1,0 +1,12 @@
+parameters:
+    webtown_php_banner:
+        db_driver: orm
+        place:
+            top:
+                label: foo
+                size: custom
+                flash: false
+            left:
+                label: bar
+                size: 10x400
+                html: false

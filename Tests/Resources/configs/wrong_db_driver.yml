@@ -1,0 +1,3 @@
+parameters:
+    webtown_php_banner:
+        db_driver: orma
