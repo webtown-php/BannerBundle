@@ -5,6 +5,7 @@ namespace WebtownPhp\BannerBundle\Manager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use WebtownPhp\BannerBundle\Entity\Banner;
+use WebtownPhp\BannerBundle\Entity\BannerRepository;
 use WebtownPhp\BannerBundle\Event\BannerEmptyEvent;
 use WebtownPhp\BannerBundle\Event\BannerSelectEvent;
 use WebtownPhp\BannerBundle\Event\Events;
@@ -40,22 +41,17 @@ class ORMManager implements ManagerInterface
      */
     public function getBannerTo($placeName, $isMeasured = true)
     {
-        if ($banner = $this->doGetBanner($placeName))
-        {
+        if ($banner = $this->doGetBanner($placeName)) {
             $event = new BannerSelectEvent();
             $name = Events::BANNER_SELECT;
-        }
-        else
-        {
+        } else {
             $event = new BannerEmptyEvent();
             $name = Events::BANNER_EMPTY;
         }
         $this->dispatcher->dispatch($name, $event);
 
-        if ($event instanceof BannerSelectEvent)
-        {
-          if ($event->getIsMeasured())
-          {
+        if ($event instanceof BannerSelectEvent) {
+          if ($event->getIsMeasured()) {
               $this->measureShowCount($banner);
           }
         }
@@ -68,10 +64,8 @@ class ORMManager implements ManagerInterface
      */
     protected function doGetBanner($placeName)
     {
-        $em = $this->doctrine->getManager();
-
-        $banners = $em->getRepository('BannerBundle:Banner')->getBannersForPlace($placeName);
-        $sum = $em->getRepository('BannerBundle:Banner')->getPrioritySumForPlace($placeName);
+        $banners = $this->getRepository()->getBannersForPlace($placeName);
+        $sum = $this->getRepository()->getPrioritySumForPlace($placeName);
 
         return $this->doGetByPriority($banners, $sum);
     }
@@ -87,10 +81,8 @@ class ORMManager implements ManagerInterface
     protected function doGetByPriority(array $banners, $max)
     {
         $rand = rand(0, $max);
-        foreach ($banners as $banner)
-        {
-            if ($rand <= 0)
-            {
+        foreach ($banners as $banner) {
+            if ($rand <= 0) {
               return $banner;
             }
             $rand -= $banner->getPriority();
@@ -106,7 +98,7 @@ class ORMManager implements ManagerInterface
      */
     public function measureDisplayCount(Banner $banner)
     {
-        $this->doctrine->getManager()->getRepository('BannerBundle:Banner')->incDisplayCountForBanner($banner);
+        $this->getRepository()->incrementDisplayCountForBanner($banner);
     }
 
     /**
@@ -116,6 +108,14 @@ class ORMManager implements ManagerInterface
      */
     public function measureClickCount(Banner $banner)
     {
-        $this->doctrine->getManager()->getRepository('BannerBundle:Banner')->incClickCountForBanner($banner);
+        $this->getRepository()->incrementClickCountForBanner($banner);
+    }
+    
+    /**
+     * @return BannerRepository
+     */
+    protected function getRepository()
+    {
+        return $this->doctrine->getManager()->getRepository('BannerBundle:Banner');
     }
 }
