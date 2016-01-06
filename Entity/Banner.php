@@ -20,99 +20,103 @@ class Banner
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="target", type="string", length=255)
      */
-    private $target;
+    protected $target;
 
     /**
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=255, nullable=false)
      */
-    private $place;
+    protected $place;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_flash_enabled", type="boolean", nullable=false)
      */
-    private $isFlashEnabled;
+    protected $isFlashEnabled;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_image_enabled", type="boolean", nullable=false)
      */
-    private $isImageEnabled;
+    protected $isImageEnabled;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_html_enabled", type="boolean", nullable=false)
      */
-    private $isHtmlEnabled;
+    protected $isHtmlEnabled;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="priority", type="integer", nullable=false)
      */
-    private $priority;
+    protected $priority;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="max_display_count", type="integer", nullable=false)
      */
-    private $maxDisplayCount;
+    protected $maxDisplayCount;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="start_at", type="datetime")
      */
-    private $startAt;
+    protected $startAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="end_at", type="datetime")
      */
-    private $endAt;
+    protected $endAt;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="display_count", type="integer", nullable=false)
      */
-    private $displayCount;
+    protected $displayCount;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="click_count", type="integer", nullable=false)
      */
-    private $clickCount;
+    protected $clickCount;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
-    private $isActive;
+    protected $isActive;
 
+    /**
+     * ===========================================================================================
+     *                       B E G I N   S E T T E R S   A N D   G E T T E R S
+     */
 
     /**
      * Get id
@@ -422,4 +426,10 @@ class Banner
     {
         return $this->isActive;
     }
+
+    /**
+     *                       E N D   S E T T E R S   A N D   G E T T E R S
+     * ===========================================================================================
+     */
+
 }
