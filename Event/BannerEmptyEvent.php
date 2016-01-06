@@ -6,14 +6,12 @@ use Symfony\Component\EventDispatcher\Event;
 
 class BannerEmptyEvent extends Event
 {
-    protected
-        /**
-         * Banner place name
-         *
-         * @var string
-         */
-        $place
-    ;
+    /**
+     * Banner place name
+     *
+     * @var string
+     */
+    protected $place;
 
     /**
      * @return string

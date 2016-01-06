@@ -8,33 +8,31 @@ use WebtownPhp\BannerBundle\Entity\Banner;
 
 class BannerSelectEvent extends Event
 {
-    protected
-        /**
-         * Banner place name
-         *
-         * @var string
-         */
-        $place,
+    /**
+     * Banner place name
+     *
+     * @var string
+     */
+    protected $place;
 
-        /**
-         * Banner entity
-         *
-         * @var Banner
-         */
-        $banner,
+    /**
+     * Banner entity
+     *
+     * @var Banner
+     */
+    protected $banner;
 
-        /**
-         * @var EntityManagerInterface
-         */
-        $entityManager,
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
 
-        /**
-         * should banner view be counted
-         *
-         * @var bool
-         */
-        $isMeasured
-    ;
+    /**
+     * should banner view be counted
+     *
+     * @var bool
+     */
+    protected $isMeasured;
 
     /**
      * @return string
@@ -62,10 +60,14 @@ class BannerSelectEvent extends Event
 
     /**
      * @param EntityManagerInterface $entityManager
+     *
+     * @return BannerSelectEvent
      */
     public function setEntityManager(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+
+        return $this;
     }
 
     /**
@@ -78,9 +80,13 @@ class BannerSelectEvent extends Event
 
     /**
      * @param bool $isMeasured
+     *
+     * @return BannerSelectEvent
      */
     public function setIsMeasured($isMeasured)
     {
         $this->isMeasured = $isMeasured;
+
+        return $this;
     }
 }

@@ -19,6 +19,9 @@ class BannerRepository extends EntityRepository
      */
     public function getBannersForPlace($placeName)
     {
+        /**
+         * @todo test with multiple queries intead of "OR"
+         */
         $query = $this->_em->createQuery(
             'SELECT b
             FROM BannerBundle:Banner b
@@ -40,6 +43,9 @@ class BannerRepository extends EntityRepository
      */
     public function getPrioritySumForPlace($placeName)
     {
+        /**
+         * @todo test with multiple queries intead of "OR"
+         */
         $query = $this->_em->createQuery(
             'SELECT SUM(b.priority) as s
             FROM BannerBundle:Banner b
@@ -59,7 +65,7 @@ class BannerRepository extends EntityRepository
      *
      * @param Banner $banner
      */
-    public function incDisplayCountForBanner(Banner $banner)
+    public function incrementDisplayCountForBanner(Banner $banner)
     {
         $this->_em->createQuery(
             'UPDATE BannerBundle:Banner b
@@ -74,7 +80,7 @@ class BannerRepository extends EntityRepository
      *
      * @param Banner $banner
      */
-    public function incClickCountForBanner(Banner $banner)
+    public function incrementClickCountForBanner(Banner $banner)
     {
         $this->_em->createQuery(
             'UPDATE BannerBundle:Banner b

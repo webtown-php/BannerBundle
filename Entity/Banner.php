@@ -34,7 +34,8 @@ class Banner
      *
      * @var string
      *
-     * @ORM\Column(name="target", type="string", length=255)
+     * @ORM\Column(name="target", type="string", length=255, options={
+     *          "comment": "Clicked banner target URL"})
      */
     protected $target;
 
@@ -43,7 +44,8 @@ class Banner
      *
      * @var string
      *
-     * @ORM\Column(name="place", type="string", length=255, nullable=false)
+     * @ORM\Column(name="place", type="string", length=255, nullable=false, options={
+     *  "comment": "Place name for banner"})
      */
     protected $place;
 
@@ -69,18 +71,22 @@ class Banner
     protected $isHtmlEnabled;
 
     /**
-     * Show priority
+     * Display priority
      *
      * @var integer
      *
-     * @ORM\Column(name="priority", type="integer", nullable=false)
+     * @ORM\Column(name="priority", type="integer", nullable=false, options={
+     *  "comment": "Display priority"})
      */
     protected $priority;
 
     /**
+     * Max No. of times banner can be displayed
+     *
      * @var integer
      *
-     * @ORM\Column(name="max_display_count", type="integer", nullable=false)
+     * @ORM\Column(name="max_display_count", type="integer", nullable=false, options={
+     *  "comment": "Max No. of times banner can be displayed"})
      */
     protected $maxDisplayCount;
 
