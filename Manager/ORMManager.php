@@ -38,6 +38,8 @@ class ORMManager implements ManagerInterface
      *
      * @param string    $placeName  Banner place name
      * @param bool|true $isMeasured Should views be counted
+     *
+     * @return Banner
      */
     public function getBannerTo($placeName, $isMeasured = true)
     {
@@ -50,11 +52,11 @@ class ORMManager implements ManagerInterface
         }
         $this->dispatcher->dispatch($name, $event);
 
-        if ($event instanceof BannerSelectEvent) {
-          if ($event->getIsMeasured()) {
-              $this->measureShowCount($banner);
-          }
+        if ($event instanceof BannerSelectEvent && $event->getIsMeasured()) {
+            $this->measureShowCount($banner);
         }
+
+        return $banner;
     }
 
     /**
