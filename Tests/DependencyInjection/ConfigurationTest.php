@@ -1,11 +1,9 @@
 <?php
 namespace WebtownPhp\BannerBundle\Tests\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use WebtownPhp\BannerBundle\DependencyInjection\Configuration;
 use WebtownPhp\BannerBundle\DependencyInjection\WebtownPhpBannerExtension;
 
 /**
@@ -32,7 +30,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->extension = new WebtownPhpBannerExtension();
         $this->container = new ContainerBuilder();
-
         $this->container->registerExtension($this->extension);
     }
 
@@ -115,26 +112,26 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test default banner sizes availability
+     */
+    public function testDefaultConfig()
+    {
+        $this->loadConfiguration('required.yml');
+
+        $this->assertTrue(is_array($this->container->getParameter('webtown_php_banner_defaults')['sizes']));
+    }
+
+    /**
      * Load yaml config
      *
      * @param string $resource
      */
     protected function loadConfiguration($resource)
     {
-        $this->container->reset();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__.'/../Resources/configs'));
         $loader->load($resource);
+        // load config
+        $this->extension->load((array) $this->container->getParameterBag()->all(), $this->container);
         $this->container->compile();
-
-        // load current config
-        $p = $this->container->getParameterBag()->all();
-        $params = array();
-        if (is_array($p))
-        {
-            $params = $p;
-        }
-        $configuration = new Configuration();
-        $proc = new Processor();
-        $proc->processConfiguration($configuration, $params);
     }
 }
