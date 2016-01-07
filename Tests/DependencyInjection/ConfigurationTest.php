@@ -119,6 +119,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->loadConfiguration('required.yml');
 
         $this->assertTrue(is_array($this->container->getParameter('webtown_php_banner_defaults')['sizes']));
+        $this->assertTrue(in_array('webtown_php_banner.manager', $this->container->getServiceIds()));
     }
 
     /**
