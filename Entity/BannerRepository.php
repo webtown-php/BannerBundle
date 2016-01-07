@@ -2,6 +2,7 @@
 
 namespace WebtownPhp\BannerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -15,13 +16,11 @@ class BannerRepository extends EntityRepository
     /**
      * @param string $placeName
      *
-     * @return array
+     * @return ArrayCollection|Banner[]
      */
     public function getBannersForPlace($placeName)
     {
-        /**
-         * @todo test with multiple queries intead of "OR"
-         */
+        // @todo test with multiple queries intead of "OR"
         $query = $this->_em->createQuery(
             'SELECT b
             FROM BannerBundle:Banner b
@@ -43,9 +42,7 @@ class BannerRepository extends EntityRepository
      */
     public function getPrioritySumForPlace($placeName)
     {
-        /**
-         * @todo test with multiple queries intead of "OR"
-         */
+        // @todo test with multiple queries intead of "OR"
         $query = $this->_em->createQuery(
             'SELECT SUM(b.priority) as s
             FROM BannerBundle:Banner b
