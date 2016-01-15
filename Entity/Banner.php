@@ -126,6 +126,14 @@ class Banner
     protected $isActive;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    protected $content;
+
+
+    /**
      * ===========================================================================================
      *                       B E G I N   S E T T E R S   A N D   G E T T E R S
      */
@@ -440,8 +448,37 @@ class Banner
     }
 
     /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
      *                       E N D   S E T T E R S   A N D   G E T T E R S
      * ===========================================================================================
      */
 
+    /**
+     * @return string
+     */
+    public function getTypeName()
+    {
+        if ($this->getIsImageEnabled()) {
+            return 'image';
+        } elseif ($this->getIsHtmlEnabled()) {
+            return 'html';
+        } else {
+            return 'flash';
+        }
+    }
 }

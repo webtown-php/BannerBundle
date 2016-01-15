@@ -11,5 +11,3 @@ WebtownPhp\BannerBundle\Entity\Banner:
         maxDisplayCount: 1000
         displayCount: 0
         clickCount: 0
-        content: ""
-        startAt: <futureDate()>
