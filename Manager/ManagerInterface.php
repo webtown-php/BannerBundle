@@ -11,6 +11,8 @@ interface ManagerInterface
      *
      * @param string    $placeName  Banner place name
      * @param bool|true $isMeasured Should views be counted
+     *
+     * @return Banner
      */
     public function getBannerTo($placeName, $isMeasured = true);
 

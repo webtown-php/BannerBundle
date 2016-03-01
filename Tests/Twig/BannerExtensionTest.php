@@ -73,11 +73,6 @@ class BannerExtensionTest extends OMTestCase
         $this->assertContains('content.flv', $render);
     }
 
-    public function testRenderImageCustomTemplate()
-    {
-
-    }
-    
     public function testRenderEmpty()
     {
         $render = $this->ext->renderBanner($this->twigEnv, 'foo');

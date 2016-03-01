@@ -1,4 +1,4 @@
 services:
     webtown_php_banner.orm.manager:
         class: WebtownPhp\BannerBundle\Manager\ORMManager
-        arguments: [@doctrine, @event_dispatcher]
+        arguments: ["@doctrine", "@event_dispatcher"]
