@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="hu" target-language="hu" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="6a957ea8e753f9818e0ccb12173fe3e1" resname="banner.status.stopped">
+        <source>banner.status.stopped</source>
+        <target>Szünetel</target>
+      </trans-unit>
+      <trans-unit id="3de210a4d2668ac0c01953b128edbeba" resname="banner.status.expired">
+        <source>banner.status.expired</source>
+        <target>Lejárt/elfogyott</target>
+      </trans-unit>
+      <trans-unit id="af4abeba25a0ec9276179cd7a6d5996e" resname="banner.status.active">
+        <source>banner.status.active</source>
+        <target>Aktív</target>
+      </trans-unit>
+      <trans-unit id="72e004370007ef4ac6d4d17f3d7907bd" resname="Content Types">
+        <source>Content Types</source>
+        <target>Típusok</target>
+      </trans-unit>
+      <trans-unit id="908e470b30631df6ce8b7448c6d666dc" resname="Click Through Rate">
+        <source>Click Through Rate</source>
+        <target>Átkattintási arány (%)</target>
+      </trans-unit>
+      <trans-unit id="be24fcc1f1dbdc3ede9ece6407e5941b" resname="Click Count">
+        <source>Click Count</source>
+        <target>Kattintások</target>
+      </trans-unit>
+      <trans-unit id="e048d897ee6432e15922971e9d88cd67" resname="Display Count">
+        <source>Display Count</source>
+        <target>Megjelenítések</target>
+      </trans-unit>
+      <trans-unit id="1e713a1250f0c718ff121d62be359edd" resname="Max Display Count">
+        <source>Max Display Count</source>
+        <target>Max. egjelenítés</target>
+      </trans-unit>
+      <trans-unit id="502996d9790340c5fd7b86a5b93b1c9f" resname="Priority">
+        <source>Priority</source>
+        <target>Prioritás</target>
+      </trans-unit>
+      <trans-unit id="a31da7a8d1d47e6b9c6b88f58cb344f9" resname="Start At">
+        <source>Start At</source>
+        <target>Kezdő dátum</target>
+      </trans-unit>
+      <trans-unit id="05fb053982580d7afe554a5539f5b4d0" resname="End At">
+        <source>End At</source>
+        <target>Végdátum</target>
+      </trans-unit>
+      <trans-unit id="7b9cf007806ed854cd12ab800c8a982b" resname="Place">
+        <source>Place</source>
+        <target>Hely</target>
+      </trans-unit>
+      <trans-unit id="49ee3087348e8d44e1feda1917443987" resname="Name">
+        <source>Name</source>
+        <target>Név</target>
+      </trans-unit>
+      <trans-unit id="ec53a8c4f07baed5d8825072c89799be" resname="Status">
+        <source>Status</source>
+        <target>Állapot</target>
+      </trans-unit>
+      <trans-unit id="004bf6c9a40003140292e97330236c53" resname="Action">
+        <source>Action</source>
+        <target>Műveletek</target>
+      </trans-unit>
+      <trans-unit id="81718d5fab36054a7eeeb2eb86faacd2" resname="preview_action">
+        <source>preview_action</source>
+        <target>Előnézet</target>
+      </trans-unit>
+      <trans-unit id="1c13ba4d302c452e0d6e90b283b4d042" resname="toggle_action_stop">
+        <source>toggle_action_stop</source>
+        <target>Szüneteltetés</target>
+      </trans-unit>
+      <trans-unit id="c79e5d0640cdb66477832daea06285a8" resname="toggle_action_start">
+        <source>toggle_action_start</source>
+        <target>Folytatás</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

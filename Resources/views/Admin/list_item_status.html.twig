@@ -1,0 +1,13 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% trans_default_domain "WebtownPhpBannerBundle" %}
+
+{% block field %}
+    {% if (object.isExpired) %}
+        <i class="fa fa-eye-slash text-muted" title="{{ "banner.status.expired" | trans }}"></i>
+    {% elseif (object.isActive) %}
+        <i class="fa fa-eye text-success" title="{{ "banner.status.active" | trans }}"></i>
+    {% else %}
+        <i class="fa fa-ban text-muted" title="{{ "banner.status.stopped" | trans }}"></i>
+    {% endif %}
+{% endblock %}

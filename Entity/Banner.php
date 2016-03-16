@@ -481,4 +481,33 @@ class Banner
             return 'flash';
         }
     }
+
+    /**
+     * Lejárt vagy elfogyott a megjelenítési keret
+     *
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return ! is_null($this->getEndAt()) && $this->getEndAt() <= (new \DateTime()) ||
+            $this->getMaxDisplayCount() <= $this->getDisplayCount();
+    }
+
+    /**
+     * CTR
+     *
+     * @return float
+     */
+    public function getClickThroughRate()
+    {
+        return $this->getClickCount()/$this->getDisplayCount()*100;
+    }
+
+    /**
+     * pause/continue
+     */
+    public function toggle()
+    {
+        $this->setIsActive(! $this->getIsActive());
+    }
 }

@@ -2,3 +2,9 @@ services:
     webtown_php_banner.orm.manager:
         class: WebtownPhp\BannerBundle\Manager\ORMManager
         arguments: ["@doctrine", "@event_dispatcher"]
+
+    webtown_php_banner.admin.banner:
+        class: WebtownPhp\BannerBundle\Admin\BannerAdmin
+        arguments: [~, WebtownPhp\BannerBundle\Entity\Banner, WebtownPhpBannerBundle:BannerAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Banner }
