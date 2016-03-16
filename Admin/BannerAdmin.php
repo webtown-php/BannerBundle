@@ -61,8 +61,8 @@ class BannerAdmin extends Admin
             ->add('clickThroughRate')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'banner_preview' => array(
-                        'template' => 'WebtownPhpBannerBundle:Admin:list_action_banner_preview.html.twig'
+                    'preview' => array(
+                        'template' => 'WebtownPhpBannerBundle:Admin:list_action_preview.html.twig'
                     ),
                     'toggle' => array(
                         'template' => 'WebtownPhpBannerBundle:Admin:list_action_toggle.html.twig'
@@ -128,7 +128,7 @@ class BannerAdmin extends Admin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('banner_preview', $this->getRouterIdParameter().'/preview');
+        $collection->add('preview', $this->getRouterIdParameter().'/preview');
         $collection->add('toggle', $this->getRouterIdParameter().'/toggle');
     }
 }

@@ -69,13 +69,25 @@
         <source>preview_action</source>
         <target>Előnézet</target>
       </trans-unit>
-      <trans-unit id="1c13ba4d302c452e0d6e90b283b4d042" resname="toggle_action_stop">
+      <trans-unit id="288c0739b26e4051d020007f251645e9" resname="toggle_action_stop">
         <source>toggle_action_stop</source>
         <target>Szüneteltetés</target>
       </trans-unit>
       <trans-unit id="c79e5d0640cdb66477832daea06285a8" resname="toggle_action_start">
         <source>toggle_action_start</source>
         <target>Folytatás</target>
+      </trans-unit>
+      <trans-unit id="04fcf93402fb1c4f8cca9677226eea75" resname="content_name_flash">
+        <source>content_name_flash</source>
+        <target>Flash</target>
+      </trans-unit>
+      <trans-unit id="99655667aa3464abdcd059eb4e1869cd" resname="content_name_image">
+        <source>content_name_image</source>
+        <target>Kép</target>
+      </trans-unit>
+      <trans-unit id="70ac794293d097da155083426487cdc0" resname="content_name_html">
+        <source>content_name_html</source>
+        <target>HTML</target>
       </trans-unit>
     </body>
   </file>
