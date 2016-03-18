@@ -2,8 +2,9 @@
 
 namespace WebtownPhp\BannerBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Banner
@@ -13,6 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Banner
 {
+    const CONTENT_TYPE_HTML  = 'H';
+    const CONTENT_TYPE_IMAGE = 'I';
+    const CONTENT_TYPE_FLASH = 'F';
+
     /**
      * @var integer
      *
@@ -25,6 +30,7 @@ class Banner
     /**
      * @var string
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     protected $name;
@@ -42,6 +48,7 @@ class Banner
     /**
      * Place name for banner
      *
+     * @Assert\NotBlank()
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=255, nullable=false, options={
@@ -71,6 +78,14 @@ class Banner
     protected $isHtmlEnabled;
 
     /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(name="content_type", type="string", length=1, nullable=false)
+     */
+    protected $contentType;
+
+    /**
      * Display priority
      *
      * @var integer
@@ -85,6 +100,7 @@ class Banner
      *
      * @var integer
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="max_display_count", type="integer", nullable=false, options={
      *  "comment": "Max No. of times banner can be displayed"})
      */
@@ -128,6 +144,7 @@ class Banner
     /**
      * @var string
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="content", type="text", nullable=false)
      */
     protected $content;
@@ -510,4 +527,51 @@ class Banner
     {
         $this->setIsActive(! $this->getIsActive());
     }
+
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return $this->contentType;
+    }
+
+    /**
+     * @param string $contentType
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getContentTypeChoices()
+    {
+        return [
+            'content_type_flash' => self::CONTENT_TYPE_FLASH,
+            'content_type_image' => self::CONTENT_TYPE_IMAGE,
+            'content_type_html'  => self::CONTENT_TYPE_HTML,
+        ];
+    }
+
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validateDates(ExecutionContextInterface $context)
+    {
+        $start = $this->getStartAt();
+        $end = $this->getEndAt();
+        if (isset($start, $end) && $end < $start)
+        {
+            $context->buildViolation('banner_start_end_interval_invalid')
+                ->setTranslationDomain('WebtownPhpBannerBundle')
+                ->atPath('startAt')
+                ->atPath('endAt')
+                ->addViolation();
+        }
+    }
+
 }

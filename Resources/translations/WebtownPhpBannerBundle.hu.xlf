@@ -89,6 +89,38 @@
         <source>content_name_html</source>
         <target>HTML</target>
       </trans-unit>
+      <trans-unit id="99f676183f784d9d24272cba555c511e" resname="content_type_flash">
+        <source>content_type_flash</source>
+        <target>Flash</target>
+      </trans-unit>
+      <trans-unit id="8ea4262c016243f7e1cc8890e44d8c0d" resname="content_type_image">
+        <source>content_type_image</source>
+        <target>Kép</target>
+      </trans-unit>
+      <trans-unit id="226f50a9ab46f516105f821b8c8e61e8" resname="content_type_html">
+        <source>content_type_html</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="f15c1cae7882448b3fb0404682e17e61" resname="Content">
+        <source>Content</source>
+        <target>Tartalom</target>
+      </trans-unit>
+      <trans-unit id="2effa58f13159d138a634233e246713d" resname="Content Type">
+        <source>Content Type</source>
+        <target>Típus</target>
+      </trans-unit>
+      <trans-unit id="c41a31890959544c6523af684561abe5" resname="Target">
+        <source>Target</source>
+        <target>Link</target>
+      </trans-unit>
+      <trans-unit id="1203cd27e4d1ab6f1296728c021d9c1a" resname="Is Active">
+        <source>Is Active</source>
+        <target>Aktív</target>
+      </trans-unit>
+      <trans-unit id="f1d25207a05bdfa6c364b3ffef30767d" resname="banner_start_end_interval_invalid">
+        <source>banner_start_end_interval_invalid</source>
+        <target>A kezdő dátumnak a végdátum előtt kell lennie</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
