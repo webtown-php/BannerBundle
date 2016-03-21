@@ -25,5 +25,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": { "WebtownPhp\\BannerBundle\\": "" }
+    },
+    "suggest": {
+      "ext-sqlite": "Required for DB related test cases"
     }
 }

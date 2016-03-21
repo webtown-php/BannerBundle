@@ -35,9 +35,9 @@ class OMTestCase extends \PHPUnit_Framework_TestCase
     {
         // setup entity aliases
         $this->em = DoctrineTestHelper::createTestEntityManager();
-        $a = $this->em->getConfiguration()->getEntityNamespaces();
-        $a['WebtownPhpBannerBundle'] = 'WebtownPhp\BannerBundle\Entity';
-        $this->em->getConfiguration()->setEntityNamespaces($a);
+        $entityManagerNamespaces = $this->em->getConfiguration()->getEntityNamespaces();
+        $entityManagerNamespaces['WebtownPhpBannerBundle'] = 'WebtownPhp\BannerBundle\Entity';
+        $this->em->getConfiguration()->setEntityNamespaces($entityManagerNamespaces);
 
         // setup schema
         $schemaTool = new SchemaTool($this->em);

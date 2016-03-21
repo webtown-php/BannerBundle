@@ -14,9 +14,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class Banner
 {
-    const CONTENT_TYPE_HTML  = 'H';
-    const CONTENT_TYPE_IMAGE = 'I';
-    const CONTENT_TYPE_FLASH = 'F';
+    const TYPE_IMAGE = 'image';
+    const TYPE_HTML  = 'html';
+    const TYPE_FLASH = 'flash';
 
     /**
      * @var integer
@@ -158,7 +158,7 @@ class Banner
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -181,7 +181,7 @@ class Banner
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -204,7 +204,7 @@ class Banner
     /**
      * Get target
      *
-     * @return string 
+     * @return string
      */
     public function getTarget()
     {
@@ -227,7 +227,7 @@ class Banner
     /**
      * Get place
      *
-     * @return string 
+     * @return string
      */
     public function getPlace()
     {
@@ -250,7 +250,7 @@ class Banner
     /**
      * Get isFlashEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsFlashEnabled()
     {
@@ -273,7 +273,7 @@ class Banner
     /**
      * Get isImageEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsImageEnabled()
     {
@@ -296,7 +296,7 @@ class Banner
     /**
      * Get isHtmlEnabled
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsHtmlEnabled()
     {
@@ -319,7 +319,7 @@ class Banner
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {
@@ -342,7 +342,7 @@ class Banner
     /**
      * Get maxDisplayCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getMaxDisplayCount()
     {
@@ -365,7 +365,7 @@ class Banner
     /**
      * Get startAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStartAt()
     {
@@ -388,7 +388,7 @@ class Banner
     /**
      * Get endAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEndAt()
     {
@@ -411,7 +411,7 @@ class Banner
     /**
      * Get displayCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getDisplayCount()
     {
@@ -434,7 +434,7 @@ class Banner
     /**
      * Get clickCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getClickCount()
     {
@@ -457,7 +457,7 @@ class Banner
     /**
      * Get isActive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -491,11 +491,11 @@ class Banner
     public function getTypeName()
     {
         if ($this->getIsImageEnabled()) {
-            return 'image';
+            return self::TYPE_IMAGE;
         } elseif ($this->getIsHtmlEnabled()) {
-            return 'html';
+            return self::TYPE_HTML;
         } else {
-            return 'flash';
+            return self::TYPE_FLASH;
         }
     }
 
@@ -550,9 +550,9 @@ class Banner
     public static function getContentTypeChoices()
     {
         return [
-            'content_type_flash' => self::CONTENT_TYPE_FLASH,
-            'content_type_image' => self::CONTENT_TYPE_IMAGE,
-            'content_type_html'  => self::CONTENT_TYPE_HTML,
+            'content_type_flash' => self::TYPE_FLASH,
+            'content_type_image' => self::TYPE_IMAGE,
+            'content_type_html'  => self::TYPE_HTML,
         ];
     }
 

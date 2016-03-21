@@ -66,7 +66,8 @@ class BannerRepository extends EntityRepository
     {
         $query = $this->_em->createQuery(
             'SELECT COUNT(b.id) as c
-            FROM WebtownPhpBannerBundle:Banner b');
+            FROM WebtownPhpBannerBundle:Banner b WHERE b.place = :place');
+        $query->setParameters(['place' => $placeName]);
 
         return $query->getSingleScalarResult();
     }
