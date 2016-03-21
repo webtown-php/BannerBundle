@@ -1,0 +1,7 @@
+{% extends "@SonataAdmin/CRUD/base_show_field.html.twig" %}
+
+{% block field %}
+    {% if (object.isFlash) %}{{ object.content }}{% endif %}
+    {% if (object.isImage) %}<img src="{{ object.content }}">{% endif %}
+    {% if (object.isHtml) %}{{ object.content }}{% endif %}
+{% endblock %}

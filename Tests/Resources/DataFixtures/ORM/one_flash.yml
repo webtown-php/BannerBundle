@@ -4,9 +4,7 @@ WebtownPhp\BannerBundle\Entity\Banner:
         place: foo
         isActive: true
         target: index.hu
-        isFlashEnabled: true
-        isImageEnabled: false
-        isHtmlEnabled: false
+        contentType: F
         priority: 0
         maxDisplayCount: 1000
         displayCount: 0

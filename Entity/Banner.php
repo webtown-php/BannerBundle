@@ -57,27 +57,6 @@ class Banner
     protected $place;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_flash_enabled", type="boolean", nullable=false)
-     */
-    protected $isFlashEnabled;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_image_enabled", type="boolean", nullable=false)
-     */
-    protected $isImageEnabled;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_html_enabled", type="boolean", nullable=false)
-     */
-    protected $isHtmlEnabled;
-
-    /**
      * @var string
      *
      * @Assert\NotBlank()
@@ -232,75 +211,6 @@ class Banner
     public function getPlace()
     {
         return $this->place;
-    }
-
-    /**
-     * Set isFlashEnabled
-     *
-     * @param boolean $isFlashEnabled
-     * @return Banner
-     */
-    public function setIsFlashEnabled($isFlashEnabled)
-    {
-        $this->isFlashEnabled = $isFlashEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get isFlashEnabled
-     *
-     * @return boolean 
-     */
-    public function getIsFlashEnabled()
-    {
-        return $this->isFlashEnabled;
-    }
-
-    /**
-     * Set isImageEnabled
-     *
-     * @param boolean $isImageEnabled
-     * @return Banner
-     */
-    public function setIsImageEnabled($isImageEnabled)
-    {
-        $this->isImageEnabled = $isImageEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get isImageEnabled
-     *
-     * @return boolean 
-     */
-    public function getIsImageEnabled()
-    {
-        return $this->isImageEnabled;
-    }
-
-    /**
-     * Set isHtmlEnabled
-     *
-     * @param boolean $isHtmlEnabled
-     * @return Banner
-     */
-    public function setIsHtmlEnabled($isHtmlEnabled)
-    {
-        $this->isHtmlEnabled = $isHtmlEnabled;
-
-        return $this;
-    }
-
-    /**
-     * Get isHtmlEnabled
-     *
-     * @return boolean 
-     */
-    public function getIsHtmlEnabled()
-    {
-        return $this->isHtmlEnabled;
     }
 
     /**
@@ -490,9 +400,9 @@ class Banner
      */
     public function getTypeName()
     {
-        if ($this->getIsImageEnabled()) {
+        if ($this->isImage()) {
             return 'image';
-        } elseif ($this->getIsHtmlEnabled()) {
+        } elseif ($this->isHTML()) {
             return 'html';
         } else {
             return 'flash';
@@ -589,4 +499,27 @@ class Banner
         }
     }
 
+    /**
+     * @return bool
+     */
+    public function isFlash()
+    {
+        return $this->getContentType() === self::CONTENT_TYPE_FLASH;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImage()
+    {
+        return $this->getContentType() === self::CONTENT_TYPE_IMAGE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHTML()
+    {
+        return $this->getContentType() === self::CONTENT_TYPE_HTML;
+    }
 }

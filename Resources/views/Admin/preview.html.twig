@@ -3,17 +3,17 @@
 {% trans_default_domain "WebtownPhpBannerBundle" %}
 
 {% block content %}
-{% if object.isFlashEnabled %}
+{% if object.isFlash %}
 <h3>{{ "content_name_flash" | trans }}</h3>
 {{ object.content }}
 {% endif %}
 
-{% if object.isImageEnabled %}
+{% if object.isImage %}
 <h3>{{ "content_name_image" | trans }}</h3>
 <img src="{{ object.content }}" alt="" />
 {% endif %}
 
-{% if object.isHtmlEnabled %}
+{% if object.isHTML %}
 <h3>{{ "content_name_html" | trans }}</h3>
 {{ object.content }}
 {% endif %}

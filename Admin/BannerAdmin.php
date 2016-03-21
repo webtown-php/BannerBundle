@@ -24,9 +24,6 @@ class BannerAdmin extends Admin
             ->add('name')
             ->add('target')
             ->add('place')
-            ->add('isFlashEnabled')
-            ->add('isImageEnabled')
-            ->add('isHtmlEnabled')
             ->add('priority')
             ->add('maxDisplayCount')
             ->add('startAt')
@@ -129,9 +126,6 @@ class BannerAdmin extends Admin
             ->add('name')
             ->add('target')
             ->add('place')
-            ->add('isFlashEnabled')
-            ->add('isImageEnabled')
-            ->add('isHtmlEnabled')
             ->add('priority')
             ->add('maxDisplayCount')
             ->add('startAt')
@@ -139,7 +133,10 @@ class BannerAdmin extends Admin
             ->add('displayCount')
             ->add('clickCount')
             ->add('isActive')
-            ->add('content')
+            ->add('content', null, [
+                //'label'    => '',
+                'template' => 'WebtownPhpBannerBundle:Admin:show_content.html.twig'
+            ])
         ;
     }
 
