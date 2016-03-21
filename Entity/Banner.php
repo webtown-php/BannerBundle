@@ -13,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Banner
 {
+    const TYPE_IMAGE = 'image';
+    const TYPE_HTML  = 'html';
+    const TYPE_FLASH = 'flash';
+
     /**
      * @var integer
      *
@@ -474,11 +478,11 @@ class Banner
     public function getTypeName()
     {
         if ($this->getIsImageEnabled()) {
-            return 'image';
+            return self::TYPE_IMAGE;
         } elseif ($this->getIsHtmlEnabled()) {
-            return 'html';
+            return self::TYPE_HTML;
         } else {
-            return 'flash';
+            return self::TYPE_FLASH;
         }
     }
 }
