@@ -11,7 +11,7 @@ class BannerExtensionTest extends OMTestCase
     /**
      * @var BannerExtension
      */
-    protected $ext;
+    protected $bannerExtension;
 
     /**
      * @var \Twig_Environment
@@ -22,7 +22,7 @@ class BannerExtensionTest extends OMTestCase
     {
         parent::setUp();
 
-        $this->ext = new BannerExtension($this->bm);
+        $this->bannerExtension = new BannerExtension($this->bm);
 
         // empty template
         $templates = [
@@ -44,7 +44,7 @@ class BannerExtensionTest extends OMTestCase
     public function testRenderImage()
     {
         $this->loadFixtures(['one_img.yml']);
-        $render = $this->ext->renderBanner($this->twigEnv, 'foo');
+        $render = $this->bannerExtension->renderBanner($this->twigEnv, 'foo');
         $this->assertContains('image', $render);
         $this->assertContains('content.jpg', $render);
     }
@@ -52,7 +52,7 @@ class BannerExtensionTest extends OMTestCase
     public function testRenderImageCustom()
     {
         $this->loadFixtures(['one_img.yml']);
-        $render = $this->ext->renderBanner($this->twigEnv, 'foo', 'WebtownPhpBannerBundle:partials:custom_image.html.twig');
+        $render = $this->bannerExtension->renderBanner($this->twigEnv, 'foo', 'WebtownPhpBannerBundle:partials:custom_image.html.twig');
         $this->assertContains('custom', $render);
         $this->assertContains('content.jpg', $render);
     }
@@ -60,7 +60,7 @@ class BannerExtensionTest extends OMTestCase
     public function testRenderHtml()
     {
         $this->loadFixtures(['one_html.yml']);
-        $render = $this->ext->renderBanner($this->twigEnv, 'foo');
+        $render = $this->bannerExtension->renderBanner($this->twigEnv, 'foo');
         $this->assertContains('html', $render);
         $this->assertContains('Content', $render);
     }
@@ -68,14 +68,14 @@ class BannerExtensionTest extends OMTestCase
     public function testRenderFlash()
     {
         $this->loadFixtures(['one_flash.yml']);
-        $render = $this->ext->renderBanner($this->twigEnv, 'foo');
+        $render = $this->bannerExtension->renderBanner($this->twigEnv, 'foo');
         $this->assertContains('flash', $render);
         $this->assertContains('content.flv', $render);
     }
 
     public function testRenderEmpty()
     {
-        $render = $this->ext->renderBanner($this->twigEnv, 'foo');
+        $render = $this->bannerExtension->renderBanner($this->twigEnv, 'foo');
         $this->assertContains('foo', $render);
     }
 }
