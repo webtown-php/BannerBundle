@@ -5,7 +5,6 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 use WebtownPhp\BannerBundle\DependencyInjection\Configuration;
-use WebtownPhp\BannerBundle\DependencyInjection\WebtownPhpBannerExtension;
 
 /**
  * Class ConfigurationTest
@@ -18,11 +17,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      * @var ContainerBuilder
      */
     protected $container;
-
-    /**
-     * @var WebtownPhpBannerExtension
-     */
-    protected $extension;
 
     protected $config = array();
 

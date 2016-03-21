@@ -1,0 +1,4 @@
+<a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('toggle', object) }}">
+    <i class="fa fa-search-plus"></i>
+    {{ (object.isActive ? "toggle_action_stop" : "toggle_action_start") | trans({}, "WebtownPhpBannerBundle") }}
+</a>

@@ -1,0 +1,7 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    <i class="fa fa-youtube-play {% if (not object.isFlashEnabled) %}text-muted{% endif %}"></i>
+    <i class="fa fa-file-image-o {% if (not object.isImageEnabled) %}text-muted{% endif %}"></i>
+    <i class="fa fa-file-code-o  {% if (not object.isHtmlEnabled) %}text-muted{% endif %}"></i>
+{% endblock %}

@@ -10,4 +10,5 @@ WebtownPhp\BannerBundle\Entity\Banner:
         priority: 0
         maxDisplayCount: 10
         displayCount: 8
+        content: ""
         clickCount: 0

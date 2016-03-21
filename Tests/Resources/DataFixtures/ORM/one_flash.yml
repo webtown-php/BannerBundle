@@ -4,12 +4,11 @@ WebtownPhp\BannerBundle\Entity\Banner:
         place: foo
         isActive: true
         target: index.hu
-        isFlashEnabled: false
-        isImageEnabled: true
+        isFlashEnabled: true
+        isImageEnabled: false
         isHtmlEnabled: false
         priority: 0
         maxDisplayCount: 1000
         displayCount: 0
+        content: content.flv
         clickCount: 0
-        content: ""
-        startAt: <futureDate()>

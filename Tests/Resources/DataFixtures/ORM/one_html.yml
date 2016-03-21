@@ -5,11 +5,10 @@ WebtownPhp\BannerBundle\Entity\Banner:
         isActive: true
         target: index.hu
         isFlashEnabled: false
-        isImageEnabled: true
-        isHtmlEnabled: false
+        isImageEnabled: false
+        isHtmlEnabled: true
         priority: 0
         maxDisplayCount: 1000
         displayCount: 0
+        content: "<div>Content</div>"
         clickCount: 0
-        content: ""
-        startAt: <futureDate()>

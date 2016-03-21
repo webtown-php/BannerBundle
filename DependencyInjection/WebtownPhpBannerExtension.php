@@ -20,13 +20,14 @@ class WebtownPhpBannerExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $this->processConfiguration($configuration, $configs);
+        $configMerged = $this->processConfiguration($configuration, $configs);
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
         $loader->load('defaults.yml');
+        $loader->load('services.yml');
 
+        $container->setParameter('webtown_php_banner', $configMerged);
         // create service alias
-        $driver = $container->getParameter('webtown_php_banner')['db_driver'];
+        $driver = $configMerged['db_driver'];
         $service = sprintf('webtown_php_banner.%s.manager', $driver);
         $container->setAlias('webtown_php_banner.manager', $service);
     }

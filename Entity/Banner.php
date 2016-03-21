@@ -126,6 +126,14 @@ class Banner
     protected $isActive;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    protected $content;
+
+
+    /**
      * ===========================================================================================
      *                       B E G I N   S E T T E R S   A N D   G E T T E R S
      */
@@ -440,8 +448,66 @@ class Banner
     }
 
     /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
      *                       E N D   S E T T E R S   A N D   G E T T E R S
      * ===========================================================================================
      */
 
+    /**
+     * @return string
+     */
+    public function getTypeName()
+    {
+        if ($this->getIsImageEnabled()) {
+            return 'image';
+        } elseif ($this->getIsHtmlEnabled()) {
+            return 'html';
+        } else {
+            return 'flash';
+        }
+    }
+
+    /**
+     * Lejárt vagy elfogyott a megjelenítési keret
+     *
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return ! is_null($this->getEndAt()) && $this->getEndAt() <= (new \DateTime()) ||
+            $this->getMaxDisplayCount() <= $this->getDisplayCount();
+    }
+
+    /**
+     * CTR
+     *
+     * @return float
+     */
+    public function getClickThroughRate()
+    {
+        return $this->getClickCount()/$this->getDisplayCount()*100;
+    }
+
+    /**
+     * pause/continue
+     */
+    public function toggle()
+    {
+        $this->setIsActive(! $this->getIsActive());
+    }
 }
