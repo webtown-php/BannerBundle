@@ -1,9 +1,10 @@
 <?php
 namespace WebtownPhp\BannerBundle\Tests\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Yaml\Parser;
+use WebtownPhp\BannerBundle\DependencyInjection\Configuration;
 use WebtownPhp\BannerBundle\DependencyInjection\WebtownPhpBannerExtension;
 
 /**
@@ -23,15 +24,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     protected $extension;
 
-    /**
-     * Test setup
-     */
-    protected function setUp()
-    {
-        $this->extension = new WebtownPhpBannerExtension();
-        $this->container = new ContainerBuilder();
-        $this->container->registerExtension($this->extension);
-    }
+    protected $config = array();
 
     public function testEmpty()
     {
@@ -82,44 +75,33 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->loadConfiguration('one_custom_size.yml');
 
-        $this->assertEquals('orm', $this->container->getParameter('webtown_php_banner')['db_driver']);
-        $this->assertEquals(100, $this->container->getParameter('webtown_php_banner')['custom_size']['wide']['width']);
-        $this->assertEquals(10, $this->container->getParameter('webtown_php_banner')['custom_size']['wide']['height']);
+        $this->assertEquals('orm', $this->config['db_driver']);
+        $this->assertEquals(100, $this->config['custom_size']['wide']['width']);
+        $this->assertEquals(10, $this->config['custom_size']['wide']['height']);
     }
 
     public function testMoreCustomSize()
     {
         $this->loadConfiguration('more_custom_size.yml');
 
-        $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['custom_size']['wide']));
-        $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['custom_size']['tall']));
+        $this->assertEquals(true, isset($this->config['custom_size']['wide']));
+        $this->assertEquals(true, isset($this->config['custom_size']['tall']));
     }
 
     public function testOnePlace()
     {
         $this->loadConfiguration('one_place.yml');
 
-        $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['place']['top']));
-        $this->assertEquals(false, $this->container->getParameter('webtown_php_banner')['place']['top']['flash']);
+        $this->assertEquals(true, isset($this->config['place']['top']));
+        $this->assertEquals(false, $this->config['place']['top']['flash']);
     }
 
     public function testMorePlace()
     {
         $this->loadConfiguration('more_place.yml');
 
-        $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['place']['top']));
-        $this->assertEquals(true, isset($this->container->getParameter('webtown_php_banner')['place']['left']));
-    }
-
-    /**
-     * Test default banner sizes availability
-     */
-    public function testDefaultConfig()
-    {
-        $this->loadConfiguration('required.yml');
-
-        $this->assertTrue(is_array($this->container->getParameter('webtown_php_banner_defaults')['sizes']));
-        $this->assertTrue(in_array('webtown_php_banner.manager', $this->container->getServiceIds()));
+        $this->assertEquals(true, isset($this->config['place']['top']));
+        $this->assertEquals(true, isset($this->config['place']['left']));
     }
 
     /**
@@ -129,10 +111,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     protected function loadConfiguration($resource)
     {
-        $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__.'/../Resources/configs'));
-        $loader->load($resource);
-        // load config
-        $this->extension->load((array) $this->container->getParameterBag()->all(), $this->container);
-        $this->container->compile();
+        $yaml = new Parser();
+        $params = (array)$yaml->parse(file_get_contents(__DIR__.'/../Resources/configs/'.$resource));
+        $params = isset($params['parameters']) ? $params['parameters'] : array();
+        $configuration = new Configuration();
+        $proc = new Processor();
+        $this->config = $proc->processConfiguration($configuration, $params);
     }
 }

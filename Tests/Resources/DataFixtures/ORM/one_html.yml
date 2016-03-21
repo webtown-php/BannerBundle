@@ -1,0 +1,14 @@
+WebtownPhp\BannerBundle\Entity\Banner:
+    banner_1:
+        name: <word()>
+        place: foo
+        isActive: true
+        target: index.hu
+        isFlashEnabled: false
+        isImageEnabled: false
+        isHtmlEnabled: true
+        priority: 0
+        maxDisplayCount: 1000
+        displayCount: 0
+        content: "<div>Content</div>"
+        clickCount: 0
