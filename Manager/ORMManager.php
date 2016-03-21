@@ -4,7 +4,6 @@ namespace WebtownPhp\BannerBundle\Manager;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Form\Exception\LogicException;
 use WebtownPhp\BannerBundle\Entity\Banner;
 use WebtownPhp\BannerBundle\Entity\BannerRepository;
 use WebtownPhp\BannerBundle\Event\BannerEmptyEvent;
@@ -46,6 +45,7 @@ class ORMManager implements ManagerInterface
     {
         if ($banner = $this->doGetBanner($placeName)) {
             $event = new BannerSelectEvent();
+            $event->setIsMeasured($isMeasured);
             $name = Events::BANNER_SELECT;
         } else {
             $event = new BannerEmptyEvent();
@@ -54,7 +54,7 @@ class ORMManager implements ManagerInterface
         $this->dispatcher->dispatch($name, $event);
 
         if ($event instanceof BannerSelectEvent && $event->getIsMeasured()) {
-            $this->measureShowCount($banner);
+            $this->measureDisplayCount($banner);
         }
 
         return $banner;
@@ -83,7 +83,7 @@ class ORMManager implements ManagerInterface
             $rand -= $banner->getPriority();
         }
 
-        throw new LogicException('Banner select by priority failed.');
+        throw new \LogicException('Banner select by priority failed.');
     }
 
     /**
@@ -111,6 +111,6 @@ class ORMManager implements ManagerInterface
      */
     protected function getRepository()
     {
-        return $this->doctrine->getManager()->getRepository('BannerBundle:Banner');
+        return $this->doctrine->getManager()->getRepository('WebtownPhpBannerBundle:Banner');
     }
 }

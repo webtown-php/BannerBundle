@@ -23,12 +23,12 @@ class BannerRepository extends EntityRepository
         // @todo test with multiple queries intead of "OR"
         $query = $this->_em->createQuery(
             'SELECT b
-            FROM BannerBundle:Banner b
-            WHERE b.isActive
+            FROM WebtownPhpBannerBundle:Banner b
+            WHERE b.isActive = 1
             AND b.place = :place
             AND b.maxDisplayCount > b.displayCount
             AND (b.startAt IS NULL OR b.startAt <= :ts)
-            AND (b.endAt IS NULL OR b.endAt < :ts)'
+            AND (b.endAt IS NULL OR b.endAt > :ts)'
         )
             ->setParameter('place', $placeName)
             ->setParameter('ts', new \DateTime());
@@ -45,14 +45,28 @@ class BannerRepository extends EntityRepository
         // @todo test with multiple queries intead of "OR"
         $query = $this->_em->createQuery(
             'SELECT SUM(b.priority) as s
-            FROM BannerBundle:Banner b
-            WHERE b.isActive
+            FROM WebtownPhpBannerBundle:Banner b
+            WHERE b.isActive = 1
             AND b.maxDisplayCount > b.displayCount
             AND (b.startAt IS NULL OR b.startAt <= :ts)
-            AND (b.endAt IS NULL OR b.endAt < :ts)'
+            AND (b.endAt IS NULL OR b.endAt > :ts)'
         )
             ->setParameter('place', $placeName)
             ->setParameter('ts', new \DateTime());
+
+        return $query->getSingleScalarResult();
+    }
+
+    /**
+     * @param string $placeName
+     *
+     * @return int
+     */
+    public function getBannerCountForPlace($placeName)
+    {
+        $query = $this->_em->createQuery(
+            'SELECT COUNT(b.id) as c
+            FROM WebtownPhpBannerBundle:Banner b');
 
         return $query->getSingleScalarResult();
     }
@@ -65,9 +79,9 @@ class BannerRepository extends EntityRepository
     public function incrementDisplayCountForBanner(Banner $banner)
     {
         $this->_em->createQuery(
-            'UPDATE BannerBundle:Banner b
-            WHERE b.id = :id
-            SET b.displayCount = b.displayCount+1')
+            'UPDATE WebtownPhpBannerBundle:Banner b
+            SET b.displayCount = b.displayCount+1
+            WHERE b.id = :id')
             ->setParameter('id', $banner->getId())
             ->execute();
     }
@@ -80,7 +94,7 @@ class BannerRepository extends EntityRepository
     public function incrementClickCountForBanner(Banner $banner)
     {
         $this->_em->createQuery(
-            'UPDATE BannerBundle:Banner b
+            'UPDATE WebtownPhpBannerBundle:Banner b
             WHERE b.id = :id
             SET b.clickCount = b.clickCount+1')
             ->setParameter('id', $banner->getId())

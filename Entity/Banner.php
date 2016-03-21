@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Banner
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Webtown\EmailBundle\Entity\BannerRepository")
+ * @ORM\Entity(repositoryClass="WebtownPhp\BannerBundle\Entity\BannerRepository")
  */
 class Banner
 {
@@ -34,7 +34,7 @@ class Banner
      *
      * @var string
      *
-     * @ORM\Column(name="target", type="string", length=255, options={
+     * @ORM\Column(name="target", type="string", length=255, nullable=true, options={
      *          "comment": "Clicked banner target URL"})
      */
     protected $target;
@@ -93,14 +93,14 @@ class Banner
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_at", type="datetime")
+     * @ORM\Column(name="start_at", type="datetime", nullable=true)
      */
     protected $startAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_at", type="datetime")
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     protected $endAt;
 
