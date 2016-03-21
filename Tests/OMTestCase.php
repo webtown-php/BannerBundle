@@ -45,14 +45,8 @@ class OMTestCase extends \PHPUnit_Framework_TestCase
         foreach ($this->getEntities() as $entityClass) {
             $classes[] = $this->em->getClassMetadata($entityClass);
         }
-        try {
-            $schemaTool->dropSchema($classes);
-        } catch (\Exception $e) {
-        }
-        try {
-            $schemaTool->createSchema($classes);
-        } catch (\Exception $e) {
-        }
+        $schemaTool->dropSchema($classes);
+        $schemaTool->createSchema($classes);
 
         $registry = \Mockery::mock('Doctrine\Bundle\DoctrineBundle\Registry');
         $registry->shouldReceive('getManager')->andReturn($this->em);
