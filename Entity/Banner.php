@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Banner
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Webtown\EmailBundle\Entity\BannerRepository")
+ * @ORM\Entity(repositoryClass="WebtownPhp\BannerBundle\Entity\BannerRepository")
  */
 class Banner
 {
@@ -34,7 +34,7 @@ class Banner
      *
      * @var string
      *
-     * @ORM\Column(name="target", type="string", length=255, options={
+     * @ORM\Column(name="target", type="string", length=255, nullable=true, options={
      *          "comment": "Clicked banner target URL"})
      */
     protected $target;
@@ -93,14 +93,14 @@ class Banner
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_at", type="datetime")
+     * @ORM\Column(name="start_at", type="datetime", nullable=true)
      */
     protected $startAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_at", type="datetime")
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     protected $endAt;
 
@@ -124,6 +124,14 @@ class Banner
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     protected $isActive;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    protected $content;
+
 
     /**
      * ===========================================================================================
@@ -440,8 +448,66 @@ class Banner
     }
 
     /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
      *                       E N D   S E T T E R S   A N D   G E T T E R S
      * ===========================================================================================
      */
 
+    /**
+     * @return string
+     */
+    public function getTypeName()
+    {
+        if ($this->getIsImageEnabled()) {
+            return 'image';
+        } elseif ($this->getIsHtmlEnabled()) {
+            return 'html';
+        } else {
+            return 'flash';
+        }
+    }
+
+    /**
+     * Lejárt vagy elfogyott a megjelenítési keret
+     *
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return ! is_null($this->getEndAt()) && $this->getEndAt() <= (new \DateTime()) ||
+            $this->getMaxDisplayCount() <= $this->getDisplayCount();
+    }
+
+    /**
+     * CTR
+     *
+     * @return float
+     */
+    public function getClickThroughRate()
+    {
+        return $this->getClickCount()/$this->getDisplayCount()*100;
+    }
+
+    /**
+     * pause/continue
+     */
+    public function toggle()
+    {
+        $this->setIsActive(! $this->getIsActive());
+    }
 }
