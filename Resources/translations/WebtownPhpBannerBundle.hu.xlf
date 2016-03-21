@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="1e713a1250f0c718ff121d62be359edd" resname="Max Display Count">
         <source>Max Display Count</source>
-        <target>Max. egjelenítés</target>
+        <target>Max. megjelenítés</target>
       </trans-unit>
       <trans-unit id="502996d9790340c5fd7b86a5b93b1c9f" resname="Priority">
         <source>Priority</source>
@@ -120,6 +120,14 @@
       <trans-unit id="f1d25207a05bdfa6c364b3ffef30767d" resname="banner_start_end_interval_invalid">
         <source>banner_start_end_interval_invalid</source>
         <target>A kezdő dátumnak a végdátum előtt kell lennie</target>
+      </trans-unit>
+      <trans-unit id="8aff5ea5b91b3ec624d60b4dc8a710a4" resname="max_display_count_help">
+        <source>max_display_count_help</source>
+        <target>Eddigi megjelenések száma: %current%</target>
+      </trans-unit>
+      <trans-unit id="29b3ab4cc7f8f0b2f876aee4725245c0" resname="invalid_max_display_count">
+        <source>invalid_max_display_count</source>
+        <target>Nem éri el az eddigi megjelenések számát</target>
       </trans-unit>
     </body>
   </file>

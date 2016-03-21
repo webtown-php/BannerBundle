@@ -574,4 +574,19 @@ class Banner
         }
     }
 
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validateMaxDisplayCount(ExecutionContextInterface $context)
+    {
+        if ($this->getMaxDisplayCount() < $this->getDisplayCount())
+        {
+            $context->buildViolation('invalid_max_display_count')
+                ->setTranslationDomain('WebtownPhpBannerBundle')
+                ->atPath('maxDisplayCount')
+                ->addViolation();
+        }
+    }
+
 }
