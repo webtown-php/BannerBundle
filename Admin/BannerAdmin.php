@@ -81,8 +81,9 @@ class BannerAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $conf = $this->getConfigurationPool()->getContainer()->getParameter('webtown_php_banner');
-        $places = [];
+        $container = $this->getConfigurationPool()->getContainer();
+        $conf      = $container->getParameter('webtown_php_banner');
+        $places    = [];
         if (isset($conf['place']))
         {
             foreach ($conf['place'] as $key => $data)
@@ -108,6 +109,14 @@ class BannerAdmin extends Admin
             ))
             ->add('content')
         ;
+        $banner = $this->getSubject();
+        if (! is_null($banner->getId())) {
+            $help = $container->get('translator')->trans(
+                'max_display_count_help',
+                ['%current%' => $banner->getDisplayCount()],
+                'WebtownPhpBannerBundle');
+            $formMapper->addHelp('maxDisplayCount', $help);
+        }
     }
 
     /**
