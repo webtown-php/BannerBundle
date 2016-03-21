@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class BannerAdminController extends CRUDController
 {
-    public function bannerPreviewAction()
+    public function previewAction()
     {
         $object = $this->admin->getSubject();
 
@@ -15,7 +15,9 @@ class BannerAdminController extends CRUDController
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
 
-        return $this->render('WebtownPhpBannerBundle:Admin:banner_preview.html.twig');
+        return $this->render('WebtownPhpBannerBundle:Admin:preview.html.twig', [
+            'object' => $object
+        ]);
     }
 
     /**

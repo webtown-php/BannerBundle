@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use WebtownPhp\BannerBundle\Entity\Banner;
 
 class BannerAdmin extends Admin
 {
@@ -61,8 +62,8 @@ class BannerAdmin extends Admin
             ->add('clickThroughRate')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'banner_preview' => array(
-                        'template' => 'WebtownPhpBannerBundle:Admin:list_action_banner_preview.html.twig'
+                    'preview' => array(
+                        'template' => 'WebtownPhpBannerBundle:Admin:list_action_preview.html.twig'
                     ),
                     'toggle' => array(
                         'template' => 'WebtownPhpBannerBundle:Admin:list_action_toggle.html.twig'
@@ -80,21 +81,31 @@ class BannerAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $conf = $this->getConfigurationPool()->getContainer()->getParameter('webtown_php_banner');
+        $places = [];
+        if (isset($conf['place']))
+        {
+            foreach ($conf['place'] as $key => $data)
+            {
+                $places[$data['label']] = $key;
+            }
+        }
         $formMapper
-            ->add('id')
             ->add('name')
             ->add('target')
-            ->add('place')
-            ->add('isFlashEnabled')
-            ->add('isImageEnabled')
-            ->add('isHtmlEnabled')
+            ->add('place', 'choice', array(
+                'choices' => $places,
+                'choice_translation_domain' => 'WebtownPhpBannerBundle'
+            ))
             ->add('priority')
             ->add('maxDisplayCount')
             ->add('startAt')
             ->add('endAt')
-            ->add('displayCount')
-            ->add('clickCount')
             ->add('isActive')
+            ->add('contentType', 'choice', array(
+                'choices' => Banner::getContentTypeChoices(),
+                'choice_translation_domain' => 'WebtownPhpBannerBundle'
+            ))
             ->add('content')
         ;
     }
@@ -128,7 +139,7 @@ class BannerAdmin extends Admin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('banner_preview', $this->getRouterIdParameter().'/preview');
+        $collection->add('preview', $this->getRouterIdParameter().'/preview');
         $collection->add('toggle', $this->getRouterIdParameter().'/toggle');
     }
 }
