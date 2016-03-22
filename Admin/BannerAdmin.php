@@ -134,7 +134,6 @@ class BannerAdmin extends Admin
             ->add('clickCount')
             ->add('isActive')
             ->add('content', null, [
-                //'label'    => '',
                 'template' => 'WebtownPhpBannerBundle:Admin:show_content.html.twig'
             ])
         ;
@@ -147,5 +146,21 @@ class BannerAdmin extends Admin
     {
         $collection->add('preview', $this->getRouterIdParameter().'/preview');
         $collection->add('toggle', $this->getRouterIdParameter().'/toggle');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+
+        if ($action === 'show') {
+            $list['delete'] = array(
+                'template' => 'WebtownPhpBannerBundle:Admin:show_delete_button.html.twig',
+            );
+        }
+
+        return $list;
     }
 }

@@ -129,6 +129,10 @@
         <source>invalid_max_display_count</source>
         <target>Nem éri el az eddigi megjelenések számát</target>
       </trans-unit>
+      <trans-unit id="00b9bb41ce3fe00265093a9d54f20a0f" resname="show_action_delete">
+        <source>show_action_delete</source>
+        <target>Törlés</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
